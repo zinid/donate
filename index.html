@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Выбор способа оплаты</title>
-    <!-- Подключение Bootstrap CSS -->
+    <!-- Include Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
       body {
-        background-color: #18181b; /* Тёмный фон Twitch */
-        color: #fff; /* Белый текст */
+        background-color: #18181b; /* Twitch dark background */
+        color: #fff; /* White text */
       }
       .container {
         max-width: 500px;
         margin-top: 50px;
       }
       .btn-custom {
-        background-color: #9147ff; /* Фиолетовый цвет Twitch */
+        background-color: #9147ff; /* Twitch purple color */
         border-color: #9147ff;
         color: #fff;
       }
@@ -29,12 +29,12 @@
   <body class="d-flex align-items-center justify-content-center vh-100">
     <div id="currency-selection" class="container text-center" style="display: none;">
       <h2 id="heading" class="mb-4"></h2>
-      <button id="rubles-button" class="btn btn-custom btn-lg btn-block mb-3" onclick="redirectToDonatePay()">Рубли</button>
-      <button id="currency-button" class="btn btn-custom btn-lg btn-block" onclick="redirectToDonationAlerts()">Другая валюта</button>
+      <button id="rubles-button" class="btn btn-custom btn-lg btn-block mb-3" onclick="redirectToDonatePay()">🇷🇺 Рубли</button>
+      <button id="currency-button" class="btn btn-custom btn-lg btn-block" onclick="redirectToDonationAlerts()">💵 Другая валюта</button>
     </div>
 
     <script>
-      const debug = false; // Установите в true для отключения проверки местоположения
+      const debug = false; // Set to true to disable location check for debugging
 
       function redirectToDonatePay() {
           window.location.href = "https://new.donatepay.ru/@856616";
@@ -50,13 +50,13 @@
               const data = await response.json();
 
               if (data.country_code === "RU") {
-                  redirectToDonatePay(); // Редирект на Donate Pay для пользователей из России
+                  redirectToDonatePay(); // Redirect to Donate Pay for users from Russia
               } else {
-                  document.getElementById("currency-selection").style.display = "block"; // Показ формы выбора для остальных
+                  document.getElementById("currency-selection").style.display = "block"; // Show currency selection form for others
               }
           } catch (error) {
-              console.error("Не удалось определить страну:", error);
-              // Показ формы выбора, если не удалось определить страну
+              console.error("Could not determine country:", error);
+              // Show currency selection form if location check fails
               document.getElementById("currency-selection").style.display = "block";
           }
       }
@@ -67,12 +67,12 @@
 
           if (isRussian) {
               document.getElementById("heading").textContent = "Выберите валюту для пожертвования:";
-              document.getElementById("rubles-button").textContent = "Рубли";
-              document.getElementById("currency-button").textContent = "Другая валюта";
+              document.getElementById("rubles-button").textContent = "🇷🇺 Рубли";
+              document.getElementById("currency-button").textContent = "💵 Другая валюта";
           } else {
               document.getElementById("heading").textContent = "Choose your donation currency:";
-              document.getElementById("rubles-button").textContent = "Rubles";
-              document.getElementById("currency-button").textContent = "Other currency";
+              document.getElementById("rubles-button").textContent = "🇷🇺 Rubles";
+              document.getElementById("currency-button").textContent = "💵 Other currency";
           }
       }
 
@@ -85,7 +85,7 @@
       }
     </script>
 
-    <!-- Подключение Bootstrap JS и зависимостей -->
+    <!-- Include Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
