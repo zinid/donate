@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Выбор способа оплаты</title>
+</head>
+<body>
+    <h2>Выберите валюту для пожертвования:</h2>
+    <button onclick="redirectToDonatePay()">Рубли</button>
+    <button onclick="redirectToDonationAlerts()">Другая валюта</button>
+
+    <script>
+        function redirectToDonatePay() {
+            window.location.href = "https://donatepay.ru";
+        }
+
+        function redirectToDonationAlerts() {
+            window.location.href = "https://www.donationalerts.com";
+        }
+    </script>
+</body>
+</html>
