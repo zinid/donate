@@ -4,20 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Выбор способа оплаты</title>
+    <!-- Подключение Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h2>Выберите валюту для пожертвования:</h2>
-    <button onclick="redirectToDonatePay()">Рубли</button>
-    <button onclick="redirectToDonationAlerts()">Другая валюта</button>
+<body class="d-flex align-items-center justify-content-center vh-100 bg-light">
+
+    <div id="currency-selection" class="container text-center" style="display: none;">
+        <h2 id="heading" class="mb-4"></h2>
+        <button id="rubles-button" class="btn btn-success btn-lg btn-block mb-3" onclick="redirectToDonatePay()">Рубли</button>
+        <button id="currency-button" class="btn btn-primary btn-lg btn-block" onclick="redirectToDonationAlerts()">Другая валюта</button>
+    </div>
 
     <script>
         function redirectToDonatePay() {
-            window.location.href = "https://donatepay.ru";
+            window.location.href = "https://new.donatepay.ru/@856616";
         }
 
         function redirectToDonationAlerts() {
-            window.location.href = "https://www.donationalerts.com";
+            window.location.href = "https://www.donationalerts.com/r/fehuku";
         }
+
+        async function checkUserLocation() {
+            try {
+                const response = await fetch("https://ipapi.co/json/");
+                const data = await response.json();
+                
+                if (data.country_code === "RU") {
+                    redirectToDonatePay();
+                } else {
+                    document.getElementById("currency-selection").style.display = "block";
+                }
+            } catch (error) {
+                console.error("Не удалось определить страну:", error);
+                document.getElementById("currency-selection").style.display = "block";
+            }
+        }
+
+        function setLanguage() {
+            const userLang = navigator.language || navigator.userLanguage;
+            const isRussian = userLang.startsWith("ru");
+
+            if (isRussian) {
+                document.getElementById("heading").textContent = "Выберите валюту для пожертвования:";
+                document.getElementById("rubles-button").textContent = "Рубли";
+                document.getElementById("currency-button").textContent = "Другая валюта";
+            } else {
+                document.getElementById("heading").textContent = "Choose your donation currency:";
+                document.getElementById("rubles-button").textContent = "Rubles";
+                document.getElementById("currency-button").textContent = "Other currency";
+            }
+        }
+
+        setLanguage();
+        checkUserLocation();
     </script>
+
+    <!-- Подключение Bootstrap JS и зависимостей -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
