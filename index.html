@@ -6,16 +6,36 @@
     <title>Выбор способа оплаты</title>
     <!-- Подключение Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      body {
+        background-color: #18181b; /* Тёмный фон Twitch */
+        color: #fff; /* Белый текст */
+      }
+      .container {
+        max-width: 500px;
+        margin-top: 50px;
+      }
+      .btn-custom {
+        background-color: #9147ff; /* Фиолетовый цвет Twitch */
+        border-color: #9147ff;
+        color: #fff;
+      }
+      .btn-custom:hover {
+        background-color: #772ce8;
+        border-color: #772ce8;
+      }
+    </style>
   </head>
-  <body class="d-flex align-items-center justify-content-center vh-100 bg-light">
-
+  <body class="d-flex align-items-center justify-content-center vh-100">
     <div id="currency-selection" class="container text-center" style="display: none;">
       <h2 id="heading" class="mb-4"></h2>
-      <button id="rubles-button" class="btn btn-success btn-lg btn-block mb-3" onclick="redirectToDonatePay()">Рубли</button>
-      <button id="currency-button" class="btn btn-primary btn-lg btn-block" onclick="redirectToDonationAlerts()">Другая валюта</button>
+      <button id="rubles-button" class="btn btn-custom btn-lg btn-block mb-3" onclick="redirectToDonatePay()">Рубли</button>
+      <button id="currency-button" class="btn btn-custom btn-lg btn-block" onclick="redirectToDonationAlerts()">Другая валюта</button>
     </div>
 
     <script>
+      const debug = false; // Установите в true для отключения проверки местоположения
+
       function redirectToDonatePay() {
           window.location.href = "https://new.donatepay.ru/@856616";
       }
@@ -26,7 +46,7 @@
 
       async function checkUserLocation() {
           try {
-            const response = await fetch("https://ipapi.co/json/");
+              const response = await fetch("https://ipapi.co/json/");
               const data = await response.json();
 
               if (data.country_code === "RU") {
@@ -57,7 +77,12 @@
       }
 
       setLanguage();
-      checkUserLocation();
+
+      if (debug) {
+          document.getElementById("currency-selection").style.display = "block";
+      } else {
+          checkUserLocation();
+      }
     </script>
 
     <!-- Подключение Bootstrap JS и зависимостей -->
