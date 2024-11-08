@@ -73,10 +73,12 @@
           const isRussian = userLang.startsWith("ru");
 
           if (isRussian) {
+              document.title = "Выбор способа оплаты";
               document.getElementById("heading").textContent = "Выберите валюту для пожертвования";
               document.getElementById("rubles-button").textContent = "🇷🇺 Рубли";
               document.getElementById("currency-button").textContent = "💵 Другая валюта";
           } else {
+              document.title = "Choose your payment method";
               document.getElementById("heading").textContent = "Choose your donation currency";
               document.getElementById("rubles-button").textContent = "🇷🇺 Rubles";
               document.getElementById("currency-button").textContent = "💵 Other currency";
