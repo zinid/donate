@@ -37,7 +37,7 @@
       <img src="avatar.png" class="img-fluid mb-4" alt="Avatar">
       <h2 id="heading" class="mb-4"></h2>
       <button id="rubles-button" class="btn btn-custom btn-lg w-100 mb-3" onclick="redirectToDonatePay()">Рубли (₽)</button>
-      <button id="currency-button" class="btn btn-custom btn-lg w-100" onclick="redirectToDonationAlerts()">Другая валюта ($)</button>
+      <button id="currency-button" class="btn btn-custom btn-lg w-100" onclick="redirectToDonationAlerts()">Другая валюта</button>
     </div>
 
     <script>
@@ -76,12 +76,12 @@
               document.title = "Выбор способа оплаты";
               document.getElementById("heading").textContent = "Выберите валюту для пожертвования";
               document.getElementById("rubles-button").textContent = "Рубли (₽)";
-              document.getElementById("currency-button").textContent = "Другая валюта ($)";
+              document.getElementById("currency-button").textContent = "Другая валюта";
           } else {
               document.title = "Choose your payment method";
               document.getElementById("heading").textContent = "Choose your donation currency";
               document.getElementById("rubles-button").textContent = "Rubles (₽)";
-              document.getElementById("currency-button").textContent = "Other currency ($)";
+              document.getElementById("currency-button").textContent = "Other currency";
           }
       }
 
