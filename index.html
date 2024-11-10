@@ -49,22 +49,21 @@
           window.location.href = "https://www.donationalerts.com/r/fehuku";
       }
 
-      function handleLocation(data) {
-          if (data.country_code === "RU") {
-              redirectToDonatePay();
-          } else {
+      async function checkUserLocation() {
+          try {
+              const response = await fetch("https://ipapi.co/json/");
+              const data = await response.json();
+
+              if (data.country_code === "RU") {
+                  redirectToDonatePay(); // Redirect to Donate Pay for users from Russia
+              } else {
+                  document.getElementById("currency-selection").style.display = "block"; // Show currency selection form for others
+              }
+          } catch (error) {
+              console.error("Could not determine country:", error);
+              // Show currency selection form if location check fails
               document.getElementById("currency-selection").style.display = "block";
           }
-      }
-
-      function checkUserLocation() {
-          const script = document.createElement("script");
-          script.src = "https://ipapi.co/jsonp/?callback=handleLocation";
-          script.onerror = function () {
-              console.error("Could not load JSONP script");
-              document.getElementById("currency-selection").style.display = "block";
-          };
-          document.body.appendChild(script);
       }
 
       function setLanguage() {
